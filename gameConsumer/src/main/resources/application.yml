@@ -1,0 +1,14 @@
+server:
+  port: 8010
+  servlet.context-path: /xianjinyi
+spring:
+  application:
+    name: microservice-consumer-game
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8767/eureka/
+  instance:
+    prefer-ip-address: true

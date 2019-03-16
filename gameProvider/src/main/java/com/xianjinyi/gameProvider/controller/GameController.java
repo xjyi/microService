@@ -1,0 +1,29 @@
+package com.xianjinyi.gameProvider.controller;
+
+import com.xianjinyi.gameProvider.dao.UserRepository;
+import com.xianjinyi.gameProvider.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
+
+/**
+ * @Author: xianjinyi
+ * @date 2019/03/12
+ */
+
+@RestController
+@RequestMapping("/game")
+public class GameController {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping("/{id}")
+    public User listGame(@PathVariable Long id){
+        return userRepository.findById(id).get();
+    }
+}
