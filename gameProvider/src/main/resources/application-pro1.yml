@@ -1,0 +1,8 @@
+spring:
+  profiles: pro1
+server:
+  port: 8000
+
+
+
+

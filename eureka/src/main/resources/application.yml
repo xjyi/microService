@@ -1,10 +1,14 @@
-server:
-  port: 8767
+spring:
+  profiles:
+    active: peer2
+  application:
+    name: microservice-discovery-eureka
+
 eureka:
   client:
     # 是否要注册到其他Eureka Server实例
-    register-with-eureka: false
+    #register-with-eureka: false
     # 是否要从其他Eureka Server实例获取数据
-    fetch-registry: false
+    #fetch-registry: false
     service-url:
-      defaultZone: http://localhost:8767/eureka/
+      defaultZone: http://localhost:8767/eureka/,http://localhost:8769/eureka/

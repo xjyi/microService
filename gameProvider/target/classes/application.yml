@@ -1,8 +1,10 @@
+
 server:
-  port: 8000
   servlet.context-path: /xianjinyi
 
 spring:
+  profiles:
+    active: pro2
   jpa:
     # 让hibernate打印执行的SQL
     show-sql: true

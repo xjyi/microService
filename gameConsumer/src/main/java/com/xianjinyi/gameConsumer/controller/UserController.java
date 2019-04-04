@@ -25,7 +25,7 @@ public class UserController {
 
     @GetMapping("/getUserInfo/{id}")
     public User getUserInfo(@PathVariable Long id){
-        ResponseEntity<User> entity = restTemplate.getForEntity("http://localhost:8000/game/{id}", User.class,id);
+        ResponseEntity<User> entity = restTemplate.getForEntity("http://microservice-provider-user/xianjinyi/game/{id}", User.class,id);
         log.info("返回{}",entity.toString());
         return entity.getBody();
     }
