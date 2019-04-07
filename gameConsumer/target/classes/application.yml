@@ -12,3 +12,18 @@ eureka:
       defaultZone: http://localhost:8767/eureka/
   instance:
     prefer-ip-address: true
+
+#microservice-provider-user2:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+feign:
+  client:
+    config:
+      microservice-provider-user:
+        loggerLevel: full
+
+
+logging:
+  level:
+    com.xianjinyi.gameConsumer.microService.MicroServiceUser: debug
