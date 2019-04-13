@@ -41,6 +41,14 @@ public class UserController {
     }
 
 
+    @GetMapping("/multiGet")
+    public User multiGet(){
+
+        User entity = microServiceUser.multiGet(1L,"test");
+        log.info("返回{}",entity.toString());
+        return entity;
+    }
+
 
 
 

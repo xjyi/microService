@@ -2,11 +2,9 @@ package com.xianjinyi.gameProvider.controller;
 
 import com.xianjinyi.gameProvider.dao.UserRepository;
 import com.xianjinyi.gameProvider.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -17,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/game")
+@Slf4j
 public class GameController {
 
     @Autowired
@@ -24,6 +23,15 @@ public class GameController {
 
     @GetMapping("/{id}")
     public User listGame(@PathVariable Long id){
+        return userRepository.findById(id).get();
+    }
+
+    /**
+     *  多参数 get
+     */
+    @GetMapping("/multiGet")
+    public User multiGet(Long id ,String flag ){
+        log.info("请求入参：｛｝==｛｝" ,id,flag);
         return userRepository.findById(id).get();
     }
 }
