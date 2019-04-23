@@ -39,4 +39,8 @@ eureka:
   instance:
     # 是否注册IP到eureka server，如不指定或设为false，那就会注册主机名到eureka server
     prefer-ip-address: true
+    metadata-map:
+      zone: aa
+      xianjinyi: xjyi
+
 

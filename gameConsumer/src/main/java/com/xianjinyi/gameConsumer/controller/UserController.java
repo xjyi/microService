@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+
 /**
  * @Author: xianjinyi
  * @date 2019/03/12
@@ -48,6 +50,43 @@ public class UserController {
         log.info("返回{}",entity.toString());
         return entity;
     }
+
+    @GetMapping("/getByMap")
+    public User getByMap(){
+
+        HashMap hashMap = new HashMap();
+        hashMap.put("id",1L);
+        hashMap.put("flag","MapTest");
+        User entity = microServiceUser.multiGet2(hashMap);
+        log.info("getByMap返回{}",entity.toString());
+        return entity;
+    }
+
+
+    @GetMapping("/post")
+    public User post(){
+
+        HashMap hashMap = new HashMap();
+        hashMap.put("id",2L);
+        hashMap.put("flag","MapTest");
+        User entity = microServiceUser.post(hashMap);
+        log.info("post返回{}",entity.toString());
+        return entity;
+    }
+
+    @GetMapping("/postOject")
+    public User postOject(){
+
+        User user = new User();
+        user.setId(3L);
+        User entity = microServiceUser.postObject(user);
+        log.info("post返回{}",entity.toString());
+        return entity;
+    }
+
+
+
+
 
 
 

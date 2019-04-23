@@ -11,4 +11,4 @@ eureka:
     # 是否要从其他Eureka Server实例获取数据
     #fetch-registry: false
     service-url:
-      defaultZone: http://localhost:8767/eureka/ #,http://localhost:8769/eureka/
+      defaultZone: http://localhost:8761/eureka/ #,http://localhost:8769/eureka/

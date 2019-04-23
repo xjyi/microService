@@ -31,7 +31,23 @@ public class GameController {
      */
     @GetMapping("/multiGet")
     public User multiGet(Long id ,String flag ){
-        log.info("请求入参：｛｝==｛｝" ,id,flag);
+        log.info("请求入参：{}=={}" ,id,flag);
         return userRepository.findById(id).get();
     }
+
+
+    @PostMapping("/post")
+    public User post(Long id ,String flag ){
+        log.info("请求入参：{}=={}" ,id,flag);
+        return userRepository.findById(id).get();
+    }
+
+    @PostMapping("/postObject")
+    public User post(@RequestBody  User user ){
+        log.info("请求入参：{}=={}" ,user);
+        return userRepository.findById(user.getId()).get();
+    }
+
+
+
 }
