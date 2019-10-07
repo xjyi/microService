@@ -42,6 +42,13 @@
 			<optional>true</optional>
 		</dependency>
 
+
+		<!--<dependency>
+			<groupId>com.netflix.hystrix</groupId>
+			<artifactId>hystrix-core</artifactId>
+			<version>1.5.12</version>
+		</dependency>-->
+
 		<!--  监控 -->
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.boot</groupId>-->
