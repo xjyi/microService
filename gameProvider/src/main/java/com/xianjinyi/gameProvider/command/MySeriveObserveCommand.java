@@ -1,10 +1,8 @@
-package com.hzed.simulate.command;
+package com.xianjinyi.gameProvider.command;
 
-import com.hzed.simulate.vo.AutoSignRequest;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixObservableCommand;
 import rx.Observable;
-import rx.Scheduler;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 

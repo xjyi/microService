@@ -1,5 +1,7 @@
 package com.xianjinyi.gameProvider.leetcode;
 
+import java.util.ArrayList;
+
 /**
  * @Author: xianjinyi
  * @date 2019/10/15
@@ -46,7 +48,28 @@ public class Solution {
             return true;
         }
 
-    public static void main(String[] args) {
-        System.out.println(111);
+        // 链表反转
+
+    public ArrayList reverse(ArrayList list){
+        return null;
     }
+
+
+    public static void main(String[] args) {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
