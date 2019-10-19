@@ -26,7 +26,7 @@
 		<java.version>1.8</java.version>
 	</properties>
 
-	<!-- 引入spring cloud的依赖-->
+	<!-- 引入spring cloud的依赖哈哈哈-->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
