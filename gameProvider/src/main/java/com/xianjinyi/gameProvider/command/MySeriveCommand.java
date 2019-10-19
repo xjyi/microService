@@ -1,9 +1,8 @@
 package com.hzed.simulate.command;
 
-import com.hzed.simulate.vo.ApiResponse;
-import com.hzed.simulate.vo.AutoSignRequest;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
+import com.xianjinyi.gameProvider.command.AutoSignRequest;
 
 /**
  *

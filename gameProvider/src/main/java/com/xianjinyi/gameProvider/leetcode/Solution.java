@@ -1,5 +1,7 @@
 package com.xianjinyi.gameProvider.leetcode;
 
+import java.util.ArrayList;
+
 /**
  * @Author: xianjinyi
  * @date 2019/10/15
@@ -45,4 +47,29 @@ public class Solution {
             // todo 将链表前半部分还原
             return true;
         }
+
+        // 链表反转
+
+    public ArrayList reverse(ArrayList list){
+        return null;
+    }
+
+
+    public static void main(String[] args) {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

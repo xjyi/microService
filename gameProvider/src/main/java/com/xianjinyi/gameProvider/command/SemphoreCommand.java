@@ -1,7 +1,7 @@
-package com.hzed.simulate.command;
+package com.xianjinyi.gameProvider.command;
 
-import com.hzed.simulate.vo.AutoSignRequest;
 import com.netflix.hystrix.*;
+import com.xianjinyi.gameProvider.command.AutoSignRequest;
 
 import java.util.Map;
 
