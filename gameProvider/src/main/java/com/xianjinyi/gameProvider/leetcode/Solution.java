@@ -45,4 +45,8 @@ public class Solution {
             // todo 将链表前半部分还原
             return true;
         }
+
+    public static void main(String[] args) {
+        System.out.println(111);
+    }
 }
