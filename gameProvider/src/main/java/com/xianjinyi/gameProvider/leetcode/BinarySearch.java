@@ -21,6 +21,106 @@ public class BinarySearch {
     }
 
 
+    /**
+     *  二分变体
+     *  有序数组，元素可能重复
+     *  获取 最后一个  小于或等于  给定值的角标
+     */
+    public static int bSearchRepeatLast2(int aa[],int value){
+        int n = aa.length;
+        int low = 0;
+        int high = n-1;
+
+        while(low <=high){
+           int mid = low+ ((high-low)>>1);
+           if (aa[mid] <= value){
+               if(mid ==n-1 ||aa[mid+1]>value){
+                   return mid;
+               }
+               low = mid+1;
+           }else{
+               high = mid-1;
+           }
+        }
+
+
+
+        return  -1;
+    }
+
+    /**
+     *  二分变体
+     *  有序数组，元素可能重复
+     *  获取 第一个  大于或等于  给定值的角标
+     */
+    public static int bSearchRepeatFirst(int aa[],int value){
+        int n = aa.length;
+        int low = 0;
+        int high = n-1;
+
+        while(low <=high){
+            int mid = low + ((high-low)>>1);
+            if (aa[mid]>=value){
+                if (mid == 0 || aa[mid-1] <value){
+                    return mid;
+                }
+                high = mid -1;
+            }else{
+                low = mid+1;
+            }
+        }
+
+        // 应该也是对的，未验证
+//        while(low <= high){
+//            int mid = low + ((high-low)>>1);
+//
+//            if (aa[mid] >= value ){
+//                // 满足条件，但可能不是第一个
+//                high = mid-1;
+//            }else {
+//                low = mid+1;
+//            }
+//        }
+//
+//        if (low <n && aa[low] >=value){
+//            return low;
+//        }
+
+        return  -1;
+    }
+
+
+
+    /**
+     *  二分变体
+     *  有序数组，元素可能重复
+     *  获取最后一个等于给定值的角标
+     */
+    public static int bSearchRepeatLast(int aa[],int value){
+        int n = aa.length;
+        int low = 0;
+        int high = n-1;
+
+        while(low <= high){
+            int mid = low + ((high-low)>>1);
+            if (aa[mid] > value ){
+                high = mid-1;
+            }else if (aa[mid] < value){
+                low = mid+1;
+            }else{
+                if(mid == n-1 || aa[mid+1] !=value){
+                    return mid;
+                }
+                low = mid+1;
+            }
+        }
+
+
+
+        return  -1;
+    }
+
+
 
 
     /**
@@ -36,13 +136,21 @@ public class BinarySearch {
         while(low <= high){
             int mid = low + ((high-low)>>1);
             if (aa[mid] >= value ){
-                // value可能在前面。也可能是当前
+                // value可能在前面。也可能是当前，
+                // 将mid -1 ，获得的可能是刚刚错过的value的前一个值，或者只是正常的将范围缩小
+
+                // 下一循环中，如果是刚刚错过的第一个值，那将永远不会在区间内拿到，但是high不会变，
+                // 直至low = high+1退出循环，此时刚刚错过的 值也找回来了
                 high = mid - 1;
             }else{
                 low = mid+1;
             }
         }
 
+        // 防止value比所有值都大，low角标越界。所以low < n
+        if(low < n && aa[low] == value){
+            return low;
+        }
 
 
         return  -1;
