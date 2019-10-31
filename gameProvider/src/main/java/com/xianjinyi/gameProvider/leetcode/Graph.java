@@ -30,10 +30,16 @@ public class Graph {
             return;
         }
 
+        // visited是用来记录已经被访问的顶点
         boolean[] visited = new boolean[v];
         visited[s]=true;
+
+        // queue是一个队列，用来存储已经被访问、但相连的顶点还没有被访问的顶点。
         Queue<Integer> queue = new LinkedList<>();
+
         queue.add(s);
+
+        // prev用来记录搜索路径
         int[] prev = new int[v];
         for (int i = 0; i < v; ++i) {
             prev[i] = -1;
@@ -41,6 +47,7 @@ public class Graph {
 
 
         while (queue.size() != 0) {
+
             int w = queue.poll();
             for (int i = 0; i < adj[w].size(); ++i) {
                 int q = adj[w].get(i);
