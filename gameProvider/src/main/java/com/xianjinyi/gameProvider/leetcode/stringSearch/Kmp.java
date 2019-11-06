@@ -1,6 +1,79 @@
 package com.xianjinyi.gameProvider.leetcode.stringSearch;
 
+import com.alibaba.fastjson.JSON;
+
 public class Kmp {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static int mykmp(char[] a, int n, char[] b, int m) {
+
+        int[] next = getMyNexts(b,m);
+        int j =0;
+        for(int i = 0;i< n; i++){
+            while(j>0 && a[i] != b[j]){
+                j = next[j-1]+1;
+            }
+            // 走到这步，前面肯定对齐了，或者都是首位匹配（主串此时的首位可能就是前面已经检查的部分都不匹配，重新开始从头匹配）
+            if (a[i] == b[j]){
+                j++;
+            }
+            if(j == m){return i - m+1;}
+
+        }
+
+        return 0;
+    }
+
+//    public static void main(String[] args) {
+//        char[] chars = new char[]{'a','b','a','b','a','c','d'};
+//
+//        int[] myNexts = getMyNexts(chars, chars.length);
+//        System.out.println(JSON.toJSONString(myNexts));
+//
+//        System.out.println("------------");
+//        int[] nexts = getNexts(chars, chars.length);
+//        System.out.println(JSON.toJSONString(nexts));
+//    }
+    private static int[] getMyNexts(char[] b, int m) {
+        int[] next = new int[m];
+
+        next[0] =-1;
+        // 不存在是-1，所以-1开始
+        // j 同时也是下标，所以用于下标时 不能是[j]
+        int j = -1;
+        // 前缀子串从1开始
+        for (int i = 1; i < m; i++) {
+            while(j>-1 && b[i]!=b[j+1]){
+                // j此时代表坏字符前一个，
+                // 当前刚好出现坏字符，所以拿好前缀（比当前小1）的最长后缀next[j],作为新的j ，比较的是j+1
+                j = next[j];
+            }
+             // 退出while循环 表示b[i]==b[j]
+            // 或者j == -1
+            if(b[i]==b[j+1]){
+                j++;
+            }
+            next[i] = j;
+
+
+        }
+
+        return next;
+    }
+
 
     /**
      * a, b分别是主串和模式串；n, m分别是主串和模式串的长度。
