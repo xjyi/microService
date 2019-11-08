@@ -1,4 +1,4 @@
-package com.xianjinyi.gameProvider.leetcode;
+package com.xianjinyi.gameProvider.leetcode.sort;
 
 
 import com.alibaba.fastjson.JSON;

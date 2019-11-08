@@ -3,6 +3,7 @@ package com.xianjinyi.gameProvider.leetcode;
 /**
  * @Author: xianjinyi
  * @date 2019/10/29
+ * 排列组合
  */
 public class Permutation {
 
