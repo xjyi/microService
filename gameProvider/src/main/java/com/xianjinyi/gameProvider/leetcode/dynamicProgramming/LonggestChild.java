@@ -1,5 +1,7 @@
 package com.xianjinyi.gameProvider.leetcode.dynamicProgramming;
 
+
+
 /**
  * @author: xianjinyi
  * @date 2019/11/13
@@ -28,16 +30,53 @@ public class LonggestChild {
        int[] status = new int[length];
 
        status[0] = 1;
-       for (int i = 0; i < length; i++) {
-           for (int j = i; j > 0; j--) {
-                if (items[i] > items[j-1]){
-                    status[i] = status[j-1]+1;
+       for (int i = 1; i < length; i++) {
+           int max=0;
+
+           for (int j = i-1; j >= 0; j--) {
+                if (items[i] > items[j]){
+                    if (status[j] >max){
+                        max = status[j];
+                    }
                 }
+           }
+           status[i] =max +1;
+
+       }
+
+       int longest = 0;
+       int index = 0;
+       for (int i = 0; i < length; i++) {
+           if (status[i] >longest){
+               longest = status[i];
+               index = i;
            }
        }
 
+       System.out.println("最长子串长度：" +longest);
+       print(index,longest,status);
 
 
-       return 0;
+       return longest;
    }
+
+    private void print(int index,int longest,int[]status) {
+       if (index<0){
+           return;
+       }
+       // 进来的都是符合条件的
+        int stat = items[index];
+        index--;
+
+        while(index >=0 && (items[index ] >stat || status[index ] != longest-1)){
+            index--;
+        }
+        print(index ,longest-1,status);
+        System.out.println(stat);
+
+    }
+
+    public static void main(String[] args) {
+        new LonggestChild().getLongest();
+    }
 }
