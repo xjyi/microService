@@ -1,7 +1,6 @@
-package com.xianjinyi.gameProvider.leetcode;
+package com.xianjinyi.gameProvider.leetcode.graph;
 
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * @Author: xianjinyi
