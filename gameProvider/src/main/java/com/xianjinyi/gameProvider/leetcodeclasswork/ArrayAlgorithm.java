@@ -1,5 +1,11 @@
 package com.xianjinyi.gameProvider.leetcodeclasswork;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
 public class ArrayAlgorithm {
 
     /**
@@ -149,5 +155,86 @@ public class ArrayAlgorithm {
 
     }
 
+    /**
+     * 三数之和
+     */
+    class Solution {
+        public List<List<Integer>> threeSum(int[] nums) {
+            List aa =new ArrayList<List<Integer>>();
+            int n = nums.length;
+            Arrays.sort(nums);
 
+            for (int i=0;i<n;i++){
+                int left = i+1;
+                int right = n-1;
+
+                // 当前有序，i是最小的一个
+                if (nums[i] >0){
+                    break;
+                }
+                // 每个i都已经匹配过后面所有可能的元素，相同的i则说明重复
+                if (i>0 && nums[i] ==nums[i-1] ){
+                    continue;
+                }
+
+                while(left<right){
+                    int sum = nums[i] + nums[left] + nums[right];
+                    if (sum==0){
+                        ArrayList<Integer> integers = new ArrayList<>();
+                        integers.add(nums[i]);
+                        integers.add(nums[left]);
+                        integers.add(nums[right]);
+                        aa.add(integers);
+
+                        // 因为while是连续多个
+                        while (left <right && nums[left] == nums[left+1]){
+                            left++;
+                        }
+                        while (left <right && nums[right] == nums[right-1]){
+                            right--;
+                        }
+
+                        left++;
+                        right--;
+                    }else if (sum<0){
+                        // 非必需
+//                        while (left <right && nums[left] == nums[left+1]){
+//                            left++;
+//                        }
+                        left++;
+                    }else{
+
+//                        while (left <right && nums[right] == nums[right-1]){
+//                            right--;
+//                        }
+                        right--;
+                    }
+                }
+            }
+            return aa;
+        }
+    }
+
+    /**
+     * 求众数
+     */
+    public int majorityElement(int[] nums) {
+        if (nums.length == 1){
+            return nums[0];
+        }
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])){
+                Integer size = map.get(nums[i]);
+                if (size +1 > nums.length/2){
+                    return nums[i];
+                }
+                map.put(nums[i], size+1);
+            }else{
+                map.put(nums[i], 1);
+            }
+        }
+        return -1;
+    }
 }
