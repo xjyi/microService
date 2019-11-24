@@ -66,6 +66,73 @@ public class ShortestPath {
     }
 
 
+    /**
+     *
+     * @param s 起始点
+     * @param t 终点
+     */
+    public void  myDijkstra(int s ,int t,int v){
+
+        // Vertex类记录每个顶点与起始顶点的距离,此处顶点的id就是下标，实际开发需要有映射关系
+        Vertex[] vertexs = new Vertex[v];
+        for (int i = 0; i < v; i++) {
+            vertexs[i] = new Vertex(i,Integer.MAX_VALUE);
+        }
+
+        // 小顶堆，未处理的顶点都在堆中
+        PriorityQueue<Vertex> queue = new PriorityQueue<>();
+
+        boolean[] visits = new boolean[v];
+        int[] prev = new int[v];
+
+        // 起始顶点
+        visits[s] = true;
+        vertexs[s].dist = 0;
+        queue.add(vertexs[s]);
+
+
+        while(queue.size()>0){
+            Vertex poll = queue.poll();
+            if (poll.id == t){
+                break;
+            }
+
+            // 当前顶点的所有边
+            LinkedList<Edge> edges = adj[poll.id];
+
+            for (int i = 0; i < edges.size(); i++) {
+                Edge edge = edges.get(i);
+                if (poll.dist + edge.w < vertexs[edge.tid].dist){
+                    vertexs[edge.tid].dist = poll.dist + edge.w;
+                    prev[edge.tid] = i;
+
+
+                    // 这个if放里面即可，因为当前算出的路径比他自己记录的路径还大
+                    // 说明这个顶点首先肯定被计算过距离，计算过肯定就放进过队列，就不用重复计算了。放外面就是纯粹多一个无用判断
+                    if (!visits[edge.tid]){
+                        queue.add(vertexs[edge.tid]);
+                        visits[edge.tid] = true;
+
+                    }
+
+                }
+
+            }
+        }
+
+        print(s,t,prev);
+
+
+    }
+
+
+    public static void main(String[] args) {
+
+    }
+
+
+
+
     // 从顶点s到顶点t的最短路径
     public void dijkstra(int s, int t) {
         // 用来还原最短路径
@@ -99,8 +166,9 @@ public class ShortestPath {
                 break;
             }
 
-            // 优先遍历完当前所有边，再取下一个顶点（相当于广度优先遍历）
-            // 广度遍历中，顶点对每个边，是先执行最近的，这个由优先级队列完成
+            // 优先遍历完当前所有边，再取下一个顶点
+            // 顶点的每条边，先执行最近的，这个由优先级队列完成
+            // 此处不是广度优先，也不是深度优先，每次遍历顶点的所有边，从中获取最短的继续下一步
             for (int i = 0; i < adj[minVertex.id].size(); ++i) {
                 // 取出一条minVetex相连的边
                 Edge e = adj[minVertex.id].get(i);
