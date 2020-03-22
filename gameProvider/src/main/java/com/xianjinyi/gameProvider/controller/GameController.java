@@ -21,9 +21,40 @@ public class GameController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("/testSync")
+    public User testSync(){
+
+        toSynchornize();
+        return null;
+    }
+
     @GetMapping("/{id}")
     public User listGame(@PathVariable Long id){
-        return userRepository.findById(id).get();
+        //toLoop();
+        toSynchornize();
+        return null;
+//        return userRepository.findById(id).get();
+    }
+
+    private void toSynchornize(){
+        synchronized (this){
+            System.out.println("sync1");
+            try {
+
+                this.wait();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private void toLoop() {
+        int i=0;
+        while(i<Integer.MAX_VALUE){
+            System.out.println("CPU过高测试"+i);
+            i++;
+        }
     }
 
     /**

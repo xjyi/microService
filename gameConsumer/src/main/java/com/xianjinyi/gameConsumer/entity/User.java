@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  */
 
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 public class User {
 
@@ -21,4 +21,19 @@ public class User {
     private String name;
     private Integer age;
     private BigDecimal balance;
+
+    public static void main(String[] args) {
+        Integer a= 1201;
+        Integer b= 1201;
+        System.out.println(a == b);
+
+    }
+
+    public User (){
+
+    }
+    public User (Long id,String username){
+        this.id = id;
+        this.username = username;
+    }
 }

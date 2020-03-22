@@ -1,5 +1,7 @@
 package com.xianjinyi.gameProvider.leetcodeclasswork;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Stack;
@@ -204,8 +206,82 @@ public class LinkedAl {
      * @return
      */
     public int mylongestValidParentheses2(String s) {
+        // 栈方式，上面第一个是动态规划
         int max=0;
+        Stack<Integer> stack = new Stack<>();
+
+        // 保证至少有一个数据
+        stack.push(-1);
+
+        for (int i =0;i<s.length();i++){
+            if (s.charAt(i) ==  '('){
+                stack.push(i);
+            }else{
+                //  ) 时
+                stack.pop();
+                if (stack.size() == 0){
+                    // 当前 ） 没有对应，断了, 记录断了的位置
+                    stack.push(i);
+                }else{
+                    // 没断，算出距离
+                    max = Math.max(max,i- stack.peek());
+
+                }
+            }
+        }
 
         return max;
+    }
+
+
+
+
+
+
+
+    public int longestValidParentheses2(String s) {
+        int maxans = 0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                stack.push(i);
+            } else {
+                stack.pop();
+                if (stack.empty()) {
+                    stack.push(i);
+                } else {
+                    maxans = Math.max(maxans, i - stack.peek());
+                }
+            }
+        }
+        return maxans;
+    }
+
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> sta = new Stack();
+        for(int i =0;i<tokens.length;i++){
+            if("+".equals(tokens[i]) ){
+                int a = sta.pop();
+                int b = sta.pop();
+                sta.push(a+b);
+            }else if("-".equals(tokens[i])){
+                int a = sta.pop();
+                int b = sta.pop();
+                sta.push(a-b);
+            }else if("*".equals(tokens[i])){
+                int a = sta.pop();
+                int b = sta.pop();
+                sta.push(a*b);
+            }else if("/".equals(tokens[i])) {
+                int a = sta.pop();
+                int b = sta.pop();
+                sta.push(a/b);
+            }else{
+                sta.push(Integer.valueOf(tokens[i]));
+            }
+        }
+        return sta.pop();
     }
 }

@@ -5,6 +5,7 @@ import com.xianjinyi.gameConsumer.microService.MicroServiceUser;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author: xianjinyi
@@ -33,6 +37,16 @@ public class UserController {
 
     @Autowired
     private MicroServiceUser microServiceUser;
+
+
+
+    @Value("${evn}")
+    private String env;
+
+    @GetMapping("/getEnv")
+    public String getEnv(){
+        return env;
+    }
 
 
     @GetMapping("/feigh/{id}")
@@ -80,14 +94,23 @@ public class UserController {
         User user = new User();
         user.setId(3L);
         User entity = microServiceUser.postObject(user);
-        log.info("post返回{}",entity.toString());
+        log.info("post返回{}","ok");
         return entity;
     }
 
 
+    public static void main(String[] args) {
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User(1L,"肠粉"));
+        users.add(new User(2L,"蛋糕"));
+        users.add(new User(3L,"雪条"));
+        List<String> list = users.stream()
+                .map(User::getUsername)
+                .collect(Collectors.toList());
 
+        System.out.println(list);
 
-
+    }
 
 
 
