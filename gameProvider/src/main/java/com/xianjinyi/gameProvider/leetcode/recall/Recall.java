@@ -47,7 +47,6 @@ public class Recall {
     private boolean isOk(int row, int column) {
         //其他行的上一列 下一列
         int leftup = column - 1, rightup = column + 1;
-
         // 逐行往上考察每一行
         for (int i = row - 1; i >= 0; --i) {
             // 第i行的column列有棋子吗？
