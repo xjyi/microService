@@ -29,4 +29,10 @@ public class User {
     private Integer age;
     @Column
     private BigDecimal balance;
+
+    public static void main(String[] args) {
+        int pageSize = 8 * 1024 *1024;
+        int size = ~(pageSize - 1);
+        System.out.println("size=" + size);
+    }
 }

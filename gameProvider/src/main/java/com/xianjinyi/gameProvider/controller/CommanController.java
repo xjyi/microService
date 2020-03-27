@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import rx.Observable;
 import rx.Observer;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
+
 
 /**
  * command 调用四种方式
@@ -57,6 +61,7 @@ public class CommanController {
         MySeriveCommand mySeriveCommand = new MySeriveCommand(1L);
         AutoSignRequest execute = mySeriveCommand.execute();
 
+
         return execute;
     }
 
@@ -81,6 +86,11 @@ public class CommanController {
                 System.out.println(JSON.toJSONString(autoSignRequest));
             }
         });
+
+
+
         return new AutoSignRequest();
     }
+
+
 }

@@ -1,0 +1,59 @@
+
+
+awk 'BEGIN{
+  OFMT="%.3f";
+  devf="/proc/net/dev";
+  while(("cat "devf) | getline)
+  {
+      if($0 ~ /:/ && ($10+0) > 0)
+      {
+          split($1,tarr,":");
+          net[tarr[1]]=$10+tarr[2];
+          print tarr[1],$10+tarr[2];
+      }
+  }
+  close(devf);
+  while((system("sleep 1 ")) >=0)
+  {
+      system("clear");
+      while( getline < devf )
+      {
+          if($0 ~ /:/ && ($10+0) > 0)
+              {
+                  split($1,tarr,":");
+                  if(tarr[1] in net)
+                  {
+                      print tarr[1],":",($10+tarr[2]-net[tarr[1]])*8/1024,"kb/s";
+                      net[tarr[1]]=$10+tarr[2];
+                  }
+              }
+      }
+      close(devf);
+  }
+  }'
+
+
+awk -F: '
+{a[$2":"($3-$3%5)]++}
+END{
+    for(i in a){
+        split(i,t);
+        print i" 至",t[1]":"t[2]+4," 访问 "a[i] " 次" | "sort -t: -k1n -k2n"
+    }
+}'
+test.log
+
+(date;sleep 5;date;date;sleep 5;date;date) | awk -F [: ] '{print;a[$5":"($6-$6%5)]++} END{for(key in a) print key " " a[key]|"sort -t: k5n k6n"}'
+Sun Mar  8 22:30:29 CST 2020
+Sun Mar  8 22:30:34 CST 2020
+Sun Mar  8 22:30:34 CST 2020
+Sun Mar  8 22:30:39 CST 2020
+Sun Mar  8 22:30:39 CST 2020
+
+
+
+    11:35 至 11:39  访问 1 次
+    13:45 至 13:49  访问 2 次
+    13:50 至 13:54  访问 5 次
+    13:55 至 13:59  访问 1 次
+    18:10 至 18:14  访问 1 次

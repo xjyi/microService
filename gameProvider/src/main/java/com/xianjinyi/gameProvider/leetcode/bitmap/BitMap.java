@@ -1,5 +1,10 @@
 package com.xianjinyi.gameProvider.leetcode.bitmap;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BitMap {
 
 
@@ -33,76 +38,64 @@ public class BitMap {
         return (bytes[byteIndex] & (1 << bitIndex)) != 0;
     }
 
-
-
-
-
     public static void main(String[] args) {
-        System.out.println(movingCount(38,15,9));;
+        int[][] matrix = {
+                {1,4,7,11,15},
+                {2,5,8,12,19},
+                {3,6,9,16,22},
+                {10,13,14,17,24},
+                {18,21,23,26,30}};
+        System.out.println(findNumberIn2DArray (matrix,5));;
     }
 
-    static int[][] aa;
-    public static  int movingCount(int m, int n, int k) {
-         aa = new int[m][n];
 
-         // 初始化
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                aa[i][j] = -1;
-            }
+
+    public static boolean findNumberIn2DArray(int[][] matrix, int target) {
+
+
+        // 二维数组长度
+        int m = matrix.length;
+        if(m==0){
+            return false;
         }
+        int n = matrix[0].length;
+        if(n==0){
+            return false;
+        }
+        int i =0;
+        int j =0;
 
-        int count = 0;
-        toCount(0, 0, m, n, k);
+        boolean[][] flag = new boolean[m][n];
 
+        // 使用广度优先
+        LinkedList<int[]> queue = new LinkedList<int[]>();
+        queue.add(new int[]{0,0});
+        while(queue.size()>0){
+            int[] poll = queue.poll();
+            int tar = matrix[poll[0]][poll[1]];
+             i = poll[0];
+             j = poll[1];
+            System.out.println("poll:"+poll);
+            if (tar  == target){
+                return true;
+            }else if (tar > target){
+                continue;
+            }else{
 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if ( aa[i][j] ==-1){
-                    continue;
+                if (i+1 <m && (!flag[i+1][j])){
+                    flag[i+1][j] = true;
+                    queue.add(new int[]{i+1,j});
+                    System.out.println(i+1 + "-----"+j +"==="+matrix[i+1][j]);
                 }
-                count += aa[i][j];
+                if (j+1 <n && (!flag[i][j+1])){
+                    flag[i][j+1] = true;
+                    queue.add(new int[]{i,j+1});
+                    System.out.println(i + "-----"+(j+1)+"==="+matrix[i][j+1]);
+                }
             }
+
         }
-        return count;
+        return false;
     }
 
-    // 不能越过不可通过的格子
-    // 循环遍历容易越过不能通过的边界
-    // 递归容易重复统计格子
-
-
-    public static void toCount(int i,int j,int m, int n, int k) {
-        int a = i/100 + i/10 + i%10;
-        int b = j/100 + j/10 + j%10;
-
-        int i1= i+1;
-        int j1= j+1;
-        int a1 = i1/100 + i1/10 + i1%10;
-        int b1 = j1/100 + j1/10 + j1%10;
-
-        if (i == m || j == n || i < 0 || j < 0) {
-            return;
-        }
-        if (aa[i][j] != -1) {
-            return;
-        }
-
-        if (a +b > k ){
-            aa[i][j] = 0;
-            return;
-        }
-        aa[i][j] = 1;
-
-        // 上下左右
-        if (a1+b <= k ){
-            toCount(i1,j,m,n,k);
-        }
-
-        if (a+b1 <= k ){
-            toCount(i,j1,m,n,k);
-        }
-
-
-    }
 }

@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/xjyi/micros_config
+          username: 250025496@qq.com
+          password: 02020276Mx
+          basedir: E:\project\hzed\microService\config\src\main\resources\basedir  # 会默认使用git拉到这个地址
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8762/eureka/
+
+# 暴露接口
+#bus/refresh post调用config的这个接口，将mq通知获取新的配置
+management:
+  endpoints:
+    web:
+      expose: "*"
+
