@@ -5,20 +5,26 @@ spring:
     config:
       server:
         git:
-          uri: https://gitee.com/xjyi/micros_config
+          uri: https://github.com/xjyi/mySpringCloudConfig.git
           username: 250025496@qq.com
           password: 02020276Mx
           basedir: E:\project\hzed\microService\config\src\main\resources\basedir  # 会默认使用git拉到这个地址
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8762/eureka/
 
+
 # 暴露接口
 #bus/refresh post调用config的这个接口，将mq通知获取新的配置
-management:
+management: # 暴露触发消息总线的地址
   endpoints:
     web:
-      expose: "*"
-
+      exposure:
+        include: "bus-refresh"

@@ -2,13 +2,17 @@ package com.xianjinyi.gameConsumer.controller;
 
 import com.xianjinyi.gameConsumer.entity.User;
 import com.xianjinyi.gameConsumer.microService.MicroServiceUser;
+import com.xianjinyi.gameConsumer.stream.StreamClient;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +32,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/user")
 @RestController
 @Slf4j
+@RefreshScope
 public class UserController {
 
     @Autowired
@@ -40,6 +46,8 @@ public class UserController {
 
 
 
+
+
     @Value("${evn}")
     private String env;
 
@@ -47,6 +55,9 @@ public class UserController {
     public String getEnv(){
         return env;
     }
+
+
+
 
 
     @GetMapping("/feigh/{id}")
