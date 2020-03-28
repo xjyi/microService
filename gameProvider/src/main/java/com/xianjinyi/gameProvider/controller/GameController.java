@@ -66,9 +66,9 @@ public class GameController {
     @GetMapping("/{id}")
     public User listGame(@PathVariable Long id){
         //toLoop();
-        toSynchornize();
-        return null;
-//        return userRepository.findById(id).get();
+//        toSynchornize();
+//        return null;
+        return userRepository.findById(id).get();
     }
 
     private void toSynchornize(){

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
  * 使用RibbonClient，为特定的目标服务自定义配置。
  * configuration属性，指定Ribbon的配置类。
  */
-@RibbonClient(name = "microservice-provider-user", configuration = RibbonConfiguration.class)
+@RibbonClient(name = "provider", configuration = RibbonConfiguration.class)
 public class RibbonConfig {
 }
 

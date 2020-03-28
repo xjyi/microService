@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@FeignClient(name = "microservice-provider-user"/*,configuration = UserFeignConfig.class*/)
+@FeignClient(name = "provider"/*,configuration = UserFeignConfig.class*/)
 public interface MicroServiceUser {
 
     @GetMapping("/xianjinyi/game/{id}")
