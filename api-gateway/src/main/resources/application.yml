@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: api-gateway
+
+
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8762/eureka/
+
+
+server:
+  port: 9000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # 暴露metrics端点，如需暴露多个，用,分隔；如需暴露所有端点，用'*'
+        include: '*'
+
+zuul:
+  routes:
+    myGame:
+      path: /myGame/**
+      serviceId: game
+      sensitiveHeaders: #代码中默认设置了不传递cookies 此处配置为空则表示不拦截
+#  ignored-patterns:
+#    - /game/xianjinyi/user/getEnv  # 或者/**/xianjinyi/user/getEnv 则只需写一个
+#    - /myGame/xianjinyi/user/getEnv
+
