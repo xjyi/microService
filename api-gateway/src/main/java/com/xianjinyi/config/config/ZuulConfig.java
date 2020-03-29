@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author: xianjinyi
  * @date 2020/03/28
+ * 动态获取路由
  */
 @Component
 public class ZuulConfig {

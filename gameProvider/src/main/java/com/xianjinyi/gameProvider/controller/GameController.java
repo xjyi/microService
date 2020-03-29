@@ -1,5 +1,9 @@
 package com.xianjinyi.gameProvider.controller;
 
+import com.netflix.hystrix.HystrixCommandProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.xianjinyi.gameProvider.dao.UserRepository;
 import com.xianjinyi.gameProvider.entity.User;
 import com.xianjinyi.gameProvider.stream.StreamClient;
@@ -20,6 +24,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/game")
 @Slf4j
+@DefaultProperties(defaultFallback = "sendMq")// 设置当前类默认降级方法
 public class GameController {
 
     @Autowired
@@ -44,8 +49,21 @@ public class GameController {
     /**
      * MQ发送端
      * @return
+     * 常用短路器配置（也是HystrixCommandProperties中）  circuitBreaker.enabled
+     * circuitBreaker.requestVolumeThreshold   单位时间最少达到多少流量
+     * circuitBreaker.sleepWindowInMilliseconds 半开的时间，即多长时间尝试
+     * circuitBreaker.errorThresholdPercentage  打开短路器的失败百分比阈值
+     *
+     * 也可以在yml中配置，见yml
+     *
+     *
      */
     @GetMapping("/sendData")
+    @HystrixCommand(fallbackMethod = "sendMq",
+            // 超时时间配置，默认1s HystrixCommandProperties
+            commandProperties = @HystrixProperty(name= "execution.isolation.thread.timeoutInMilliseconds",value = "2000")
+
+    )
     public String sendData(){
         User user = new User();
         user.setName("神罗天征");

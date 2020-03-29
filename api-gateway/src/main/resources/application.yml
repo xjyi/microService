@@ -31,7 +31,9 @@ zuul:
       path: /myGame/**
       serviceId: game
       sensitiveHeaders: #代码中默认设置了不传递cookies 此处配置为空则表示不拦截
+  sensitive-headers: # 全局配置
 #  ignored-patterns:
 #    - /game/xianjinyi/user/getEnv  # 或者/**/xianjinyi/user/getEnv 则只需写一个
 #    - /myGame/xianjinyi/user/getEnv
+
 

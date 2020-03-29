@@ -51,3 +51,17 @@ eureka:
       xianjinyi: xjyi
 
 
+#      * 常用短路器配置（也是HystrixCommandProperties中）  circuitBreaker.enabled
+#      * circuitBreaker.requestVolumeThreshold   单位时间最少达到多少流量
+#      * circuitBreaker.sleepWindowInMilliseconds 半开的时间，即多长时间尝试
+#      * circuitBreaker.errorThresholdPercentage  打开短路器的失败百分比阈值
+# 不同版本配置方式不一致
+hystrix:
+  command:
+    default: # 全局 此位置也可以设置为CommandKey 默认是@HystrixCommand 的方法名，也可以在HystrixCommand指定
+      circuitBreaker:
+        enabled: true
+
+
+
+
